@@ -19,17 +19,17 @@ do
 
     if [ $permission = "1" ]; then
         break
-    elif [ $permission = "2"]; then
+    elif [ $permission = "2" ]; then
         break
     else
-        echo -e "\e[31;1mPlease select again number.\e[31;40;1m"
+        echo -e "\e[31;1m[!] Please select again number.\e[m"
     fi
 done
 
 # aptのアップデート
 echo "[*] apk update...";
 
-if [ $permission = "1"]; then
+if [ $permission = "1" ]; then
     apt update;
     apt dist-upgrade -y;
     apt autoremove -y;
@@ -44,9 +44,9 @@ else
     echo "$password" | sudo -S apt autoclean -y;
 fi
 
-echo -e "\e[32;1m[*] apt updated!\e[32;40;1m";
+echo -e "\e[32;1m[*] apt updated!\e[m";
 
-if [ $permission = "1"]; then
+if [ $permission = "1" ]; then
     # bannerのインストール
     apt install figlet -y;
 else
@@ -62,13 +62,13 @@ figlet APK PULL
 # adbのインストール
 echo "[*] adb install...";
 
-if [ $permission = "1"]; then
-    adb install android-tools-adb -y;
+if [ $permission = "1" ]; then
+    apt install android-tools-adb -y;
 else
-    echo "$password" | sudo -S adb install android-tools-adb -y;
+    echo "$password" | sudo -S apt install android-tools-adb -y;
 fi
 
-echo -e "\e[32;1m[*] adb installed!\e[32;40;1m";
+echo -e "\e[32;1m[*] adb installed!\e[m";
 
 # packageNameLists.txtのパス指定
 while :
@@ -82,31 +82,41 @@ do
         path="."
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
-            echo -e "\e[32;1m[*] packageNameLists.txt found!\e[32;40;1m";
-            if [ $permission = "1"]; then
+            echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
+            if [ $permission = "1" ]; then
+                echo -e "\n-------------------------------------------------------";
                 cat $path/packageNameLists.txt;
+                echo -e "-------------------------------------------------------\n";
             else
+                echo -e "\n-------------------------------------------------------";
                 echo "$password" | sudo -S cat $path/packageNameLists.txt;
+                echo -e "-------------------------------------------------------\n";
             fi
             break
         else
-            echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[31;40;1m";
+            echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
+        fi
     elif [ $options = "2" ]; then
         echo -n "input packageNameLists.txt path: ";
         read path
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
-            echo -e "\e[32;1m[*] packageNameLists.txt found!\e[32;40;1m";
-            if [ $permission = "1"]; then
+            echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
+            if [ $permission = "1" ]; then
+                echo -e "\n-------------------------------------------------------";
                 cat $path/packageNameLists.txt;
+                echo -e "-------------------------------------------------------\n";
             else
+                echo -e "\n-------------------------------------------------------";
                 echo "$password" | sudo -S cat $path/packageNameLists.txt;
+                echo -e "-------------------------------------------------------\n";
             fi
             break
         else
-            echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[31;40;1m";
+            echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
+        fi
     else
-        echo -e "\e[31;1mPlease select again number.\e[31;40;1m"
+        echo -e "\e[31;1mPlease select again number.\e[m"
     fi
 done
 
@@ -126,7 +136,7 @@ do
         read outputspath
         break
     else
-        echo -e "\e[31;1mPlease select again number.\e[31;40;1m"
+        echo -e "\e[31;1mPlease select again number.\e[m"
     fi
 done
 
@@ -143,14 +153,16 @@ do
     if [ $options = "1" ]; then
         while :
         do
+            echo -e "\n--------------------------------";
             adb devices
+            echo -e "--------------------------------\n";
             echo -n "Is the terminal to connect to displayed?(y/n): ";
             read yn
             if [ $yn = "y" ]; then
-                echo -e "\e[32;1m[*] device connected!\e[32;40;1m";
+                echo -e "\e[32;1m[*] device connected!\e[m";
                 break
             elif [ $yn = "n" ]; then
-                echo -e "\e[31;1m[!] Connect the terminal you want to connect to the PC via USB.\e[31;40;1m";
+                echo -e "\e[31;1m[!] Connect the terminal you want to connect to the PC via USB.\e[m";
             fi
         done
         break
@@ -162,19 +174,21 @@ do
             echo -n "port: ";
             read port
             adb connect $ip:$port
+            echo -e "\n--------------------------------";
             adb devices
+            echo -e "--------------------------------\n";
             echo -n "Is the terminal to connect to displayed?(y/n): ";
             read yn
             if [ $yn = "y" ]; then
-                echo -e "\e[32;1m[*] device connected!\e[32;40;1m";
+                echo -e "\e[32;1m[*] device connected!\e[m";
                 break
             elif [ $yn = "n" ]; then
-                echo -e "\e[31;1m[!] input again ip and port number.\e[31;40;1m";
+                echo -e "\e[31;1m[!] input again ip and port number.\e[m";
             fi
         done
         break
     else
-        echo -e "\e[31;1mPlease select again number.\e[31;40;1m"
+        echo -e "\e[31;1mPlease select again number.\e[m"
     fi
 done
 
@@ -194,13 +208,13 @@ do
     ## android7.0以降の回避策
     echo "[*] apk copy...";
     adb shell cp $split /storage/emulated/0/Download
-    echo -e "\e[32;1m[*] apk copied!\e[32;40;1m";
+    echo -e "\e[32;1m[*] apk copied!\e[m";
 
     ## apkの抽出
     echo "[*] apk pull...";
-    adb pull /storage/emulated/0/Download/base.apk $outputspath/
-    echo -e "\e[32;1m[*] apk pulled!\e[32;40;1m";
+    adb pull /storage/emulated/0/Download/base.apk $outputspath/$packageName.apk
+    echo -e "\e[32;1m[*] apk pulled!\e[m";
 done<"$path/packageNameLists.txt"
 
 # 終了
-echo -e "\e[32;1mfinished!\e[32;40;1m";
+echo -e "\e[32;1m[*] finished!\e[m";
