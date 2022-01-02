@@ -8,20 +8,52 @@
 # 例外時に処理を終了
 set -eu
 
-# sudo passwordを要求
-echo -n "sudo password: "
-read password
+# root or sudo mode 選択
+while :
+do
+    echo "Please select the current user rights.";
+    echo "1) Root permission"
+    echo "2) sudo permission"
+    echo -n "Please select number: "
+    read permission
+
+    if [ $permission = "1" ]; then
+        break
+    elif [ $permission = "2"]; then
+        break
+    else
+        echo -e "\e[31;1mPlease select again number.\e[31;40;1m"
+    fi
+done
 
 # aptのアップデート
 echo "[*] apk update...";
-echo "$password" | sudo -S apt update;
-echo "$password" | sudo -S apt dist-upgrade -y;
-echo "$password" | sudo -S apt autoremove -y;
-echo "$password" | sudo -S apt autoclean -y;
+
+if [ $permission = "1"]; then
+    apt update;
+    apt dist-upgrade -y;
+    apt autoremove -y;
+    apt autoclean -y;
+else
+    # sudo passwordを要求
+    echo -n "sudo password: "
+    read password
+    echo "$password" | sudo -S apt update;
+    echo "$password" | sudo -S apt dist-upgrade -y;
+    echo "$password" | sudo -S apt autoremove -y;
+    echo "$password" | sudo -S apt autoclean -y;
+fi
+
 echo -e "\e[32;1m[*] apt updated!\e[32;40;1m";
 
-# bannerのインストール
-echo "$password" | sudo -S apt install figlet -y;
+if [ $permission = "1"]; then
+    # bannerのインストール
+    apt install figlet -y;
+else
+    # bannerのインストール
+    echo "$password" | sudo -S apt install figlet -y;
+fi
+
 # 画面のクリア
 clear
 # bannerの表示
@@ -29,7 +61,13 @@ figlet APK PULL
 
 # adbのインストール
 echo "[*] adb install...";
-echo "$password" | sudo -S adb install android-tools-adb -y;
+
+if [ $permission = "1"]; then
+    adb install android-tools-adb -y;
+else
+    echo "$password" | sudo -S adb install android-tools-adb -y;
+fi
+
 echo -e "\e[32;1m[*] adb installed!\e[32;40;1m";
 
 # packageNameLists.txtのパス指定
@@ -45,7 +83,11 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[32;40;1m";
-            echo "$password" | sudo -S cat $path/packageNameLists.txt;
+            if [ $permission = "1"]; then
+                cat $path/packageNameLists.txt;
+            else
+                echo "$password" | sudo -S cat $path/packageNameLists.txt;
+            fi
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[31;40;1m";
@@ -55,7 +97,11 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[32;40;1m";
-            echo "$password" | sudo -S cat $path/packageNameLists.txt;
+            if [ $permission = "1"]; then
+                cat $path/packageNameLists.txt;
+            else
+                echo "$password" | sudo -S cat $path/packageNameLists.txt;
+            fi
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[31;40;1m";
