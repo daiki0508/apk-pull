@@ -24,6 +24,12 @@ do
     fi
 done
 
+# sudo passwordの要求
+if [ $permission = "2" ]; then
+    echo -n "sudo password: "
+    read password
+fi
+
 # packageNameLists.txtの削除
 while :
 do
