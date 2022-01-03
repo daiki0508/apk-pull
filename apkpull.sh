@@ -116,7 +116,7 @@ do
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
         fi
     else
-        echo -e "\e[31;1mPlease select again number.\e[m"
+        echo -e "\e[31;1m[!] Please select again number.\e[m"
     fi
 done
 
@@ -136,7 +136,7 @@ do
         read outputspath
         break
     else
-        echo -e "\e[31;1mPlease select again number.\e[m"
+        echo -e "\e[31;1m[!] Please select again number.\e[m"
     fi
 done
 
@@ -188,7 +188,7 @@ do
         done
         break
     else
-        echo -e "\e[31;1mPlease select again number.\e[m"
+        echo -e "\e[31;1m[!] Please select again number.\e[m"
     fi
 done
 
