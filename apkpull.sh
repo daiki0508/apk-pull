@@ -83,15 +83,13 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
+            echo -e "\n-------------------------------------------------------";
             if [ $permission = "1" ]; then
-                echo -e "\n-------------------------------------------------------";
                 cat $path/packageNameLists.txt;
-                echo -e "-------------------------------------------------------\n";
             else
-                echo -e "\n-------------------------------------------------------";
                 echo "$password" | sudo -S cat $path/packageNameLists.txt;
-                echo -e "-------------------------------------------------------\n";
             fi
+            echo -e "-------------------------------------------------------\n";
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
@@ -102,15 +100,13 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
+            echo -e "\n-------------------------------------------------------";
             if [ $permission = "1" ]; then
-                echo -e "\n-------------------------------------------------------";
                 cat $path/packageNameLists.txt;
-                echo -e "-------------------------------------------------------\n";
             else
-                echo -e "\n-------------------------------------------------------";
                 echo "$password" | sudo -S cat $path/packageNameLists.txt;
-                echo -e "-------------------------------------------------------\n";
             fi
+            echo -e "-------------------------------------------------------\n";
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
