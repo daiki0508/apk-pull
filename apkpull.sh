@@ -17,9 +17,7 @@ do
     echo -n "Please select number: "
     read permission
 
-    if [ $permission = "1" ]; then
-        break
-    elif [ $permission = "2" ]; then
+    if [ $permission = "1" ] || [ $permission = "2" ]; then
         break
     else
         echo -e "\e[31;1m[!] Please select again number.\e[m"
@@ -83,13 +81,6 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
-            echo -e "\n-------------------------------------------------------";
-            if [ $permission = "1" ]; then
-                cat $path/packageNameLists.txt;
-            else
-                echo "$password" | sudo -S cat $path/packageNameLists.txt;
-            fi
-            echo -e "-------------------------------------------------------\n";
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
@@ -100,13 +91,6 @@ do
         ## ファイルの存在チェック
         if [ -e $path/ ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
-            echo -e "\n-------------------------------------------------------";
-            if [ $permission = "1" ]; then
-                cat $path/packageNameLists.txt;
-            else
-                echo "$password" | sudo -S cat $path/packageNameLists.txt;
-            fi
-            echo -e "-------------------------------------------------------\n";
             break
         else
             echo -e "\e[31;1m[!] packageNameLists.txt didn't find.\e[m";
@@ -115,6 +99,13 @@ do
         echo -e "\e[31;1m[!] Please select again number.\e[m"
     fi
 done
+echo -e "\n-------------------------------------------------------";
+if [ $permission = "1" ]; then
+    cat $path/packageNameLists.txt;
+else
+    echo "$password" | sudo -S cat $path/packageNameLists.txt;
+fi
+echo -e "-------------------------------------------------------\n";
 
 # 取得したapkの出力先パスの指定
 while :
