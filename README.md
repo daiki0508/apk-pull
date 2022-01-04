@@ -1,4 +1,5 @@
 # apk-pull
+apk-pull is a script that can extract one or more apk files from the terminal to the PC.
 
 ## Prepare
 ### adbs
@@ -12,16 +13,24 @@ $ go install github.com/ksoichiro/adbs@latest
 ```
 3. Copy the installed adbs to /usr/local/bin.
 
+### install
+```bash
+$ git clone https://github.com/daiki0508/apk-pull.git
+```
+
 ### Creating the required files.
 1. Create packageNameLists.txt.
 2. Describe the package name of the apk you want to extract in packageNameLists.txt.
 
 ## Usages
-- apkpull.sh
+### apkpull.sh
+- Script used to extract apk file from terminal to PC.
 ```bash
 $ ./apkpull.sh
 ```
-- cleanup.sh
+
+### cleanup.sh
+- A script that clears the used packageNameLists.txt and deletes all apks in the extraction destination directory.
 ```bash
 $ ./cleanup.sh
 ```
