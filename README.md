@@ -16,6 +16,7 @@ $ go install github.com/ksoichiro/adbs@latest
 ### Install
 ```bash
 $ git clone https://github.com/daiki0508/apk-pull.git
+$ cd ./apk-pull
 $ ./install.sh
 ```
 
