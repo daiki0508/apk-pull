@@ -13,12 +13,14 @@ $ go install github.com/ksoichiro/adbs@latest
 ```
 3. Copy the installed adbs to /usr/local/bin.
 
-### install
+### Install
 ```bash
 $ git clone https://github.com/daiki0508/apk-pull.git
+$ ./install.sh
 ```
 
 ### Creating the required files.
+<b>If you want to use the files and folders created by executing install.sh as they are, the following processing is not necessary.</b>
 1. Create packageNameLists.txt.
 2. Describe the package name of the apk you want to extract in packageNameLists.txt.
 
