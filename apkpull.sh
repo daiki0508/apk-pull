@@ -24,49 +24,8 @@ do
     fi
 done
 
-# aptのアップデート
-echo "[*] apk update...";
-
-if [ $permission = "1" ]; then
-    apt update;
-    apt dist-upgrade -y;
-    apt autoremove -y;
-    apt autoclean -y;
-else
-    # sudo passwordを要求
-    echo -n "sudo password: "
-    read password
-    echo "$password" | sudo -S apt update;
-    echo "$password" | sudo -S apt dist-upgrade -y;
-    echo "$password" | sudo -S apt autoremove -y;
-    echo "$password" | sudo -S apt autoclean -y;
-fi
-
-echo -e "\e[32;1m[*] apt updated!\e[m";
-
-if [ $permission = "1" ]; then
-    # bannerのインストール
-    apt install figlet -y;
-else
-    # bannerのインストール
-    echo "$password" | sudo -S apt install figlet -y;
-fi
-
-# 画面のクリア
-clear
 # bannerの表示
 figlet APK PULL
-
-# adbのインストール
-echo "[*] adb install...";
-
-if [ $permission = "1" ]; then
-    apt install android-tools-adb -y;
-else
-    echo "$password" | sudo -S apt install android-tools-adb -y;
-fi
-
-echo -e "\e[32;1m[*] adb installed!\e[m";
 
 # packageNameLists.txtのパス指定
 while :
@@ -101,6 +60,9 @@ do
 done
 echo -e "\n-------------------------------------------------------";
 if [ $permission = "1" ]; then
+    # sudo passwordを要求
+    echo -n "sudo password: "
+    read password
     cat $path/packageNameLists.txt;
 else
     echo "$password" | sudo -S cat $path/packageNameLists.txt;
