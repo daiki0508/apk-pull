@@ -38,7 +38,7 @@ do
     if [ $options = "1" ]; then
         path="."
         ## ファイルの存在チェック
-        if [ -e $path/ ]; then
+        if [ -e $path/packageNameLists.txt ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
             break
         else
@@ -48,7 +48,7 @@ do
         echo -n "input packageNameLists.txt path: ";
         read path
         ## ファイルの存在チェック
-        if [ -e $path/ ]; then
+        if [ -e $path/packageNameLists.txt ]; then
             echo -e "\e[32;1m[*] packageNameLists.txt found!\e[m";
             break
         else
