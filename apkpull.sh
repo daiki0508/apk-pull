@@ -60,11 +60,11 @@ do
 done
 echo -e "\n-------------------------------------------------------";
 if [ $permission = "1" ]; then
+    cat $path/packageNameLists.txt;
+else
     # sudo passwordを要求
     echo -n "sudo password: "
     read password
-    cat $path/packageNameLists.txt;
-else
     echo "$password" | sudo -S cat $path/packageNameLists.txt;
 fi
 echo -e "-------------------------------------------------------\n";
