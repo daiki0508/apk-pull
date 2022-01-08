@@ -156,12 +156,12 @@ do
     
     ## android7.0以降の回避策
     echo "[*] apk copy...";
-    adb shell cp $split /storage/emulated/0/Download
+    adbs shell cp $split /storage/emulated/0/Download
     echo -e "\e[32;1m[*] apk copied!\e[m";
 
     ## apkの抽出
     echo "[*] apk pull...";
-    adb pull /storage/emulated/0/Download/base.apk $outputspath/$packageName.apk
+    adbs pull /storage/emulated/0/Download/base.apk $outputspath/$packageName.apk
     echo -e "\e[32;1m[*] apk pulled!\e[m";
 done<"$path/packageNameLists.txt"
 
